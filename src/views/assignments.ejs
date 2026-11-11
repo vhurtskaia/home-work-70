@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <title>Студенти — assignments</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <h1>Список студентів (колекція assignments)</h1>
+
+  <form method="GET" action="/assignments" class="filter-form">
+    <label>
+      Мінімальний бал (score >):
+      <input type="number" name="minScore" value="<%= minScore %>" min="0" max="100" />
+    </label>
+    <button type="submit">Фільтрувати</button>
+    <a href="/assignments">Скинути</a>
+  </form>
+
+  <% if (assignments.length === 0) { %>
+    <p>Немає студентів, що відповідають критерію.</p>
+  <% } else { %>
+    <table>
+      <thead>
+        <tr>
+          <th>Ім'я</th>
+          <th>Предмет</th>
+          <th>Бал</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% assignments.forEach(function(a) { %>
+          <tr>
+            <td><%= a.name %></td>
+            <td><%= a.subject %></td>
+            <td><%= a.score %></td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  <% } %>
+
+  <p class="hint">
+    JSON API: <a href="/api/assignments">/api/assignments</a> ·
+    Статистика: <a href="/api/assignments/stats">/api/assignments/stats</a>
+  </p>
+</body>
+</html>
